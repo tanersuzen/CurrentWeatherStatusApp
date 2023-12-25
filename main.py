@@ -50,7 +50,7 @@ my_label.pack()
 my_city = Entry(width=10)
 my_city.pack()
 
-my_api = Label(text="Enter your Api Key")
+my_api = Label(text="Enter your openweathermap.org Api Key")
 my_api.config(fg="white")
 my_api.pack()
 
