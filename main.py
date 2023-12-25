@@ -22,21 +22,25 @@ def weather_status(api_key, city):
     }
 
     response = requests.get(base_url, params=params)
+
     city_name.config(text="")
     city_temp.config(text="")
     city_humd.config(text="")
     city_desc.config(text="")
     city_error.config(text="")
+    city_error2.config(text="")
 
     if response.status_code == 200:
         current_weather_status = response.json()
-        city_name.config(text=f"{city} current weather status:")
+        city_name.config(text=f"{city} - {current_weather_status["sys"]["country"]} current weather status:")
         city_temp.config(text=f"Temperature: {current_weather_status['main']['temp']}°C")
         city_humd.config(text=f"Humidity: {current_weather_status['main']['humidity']}%")
         city_desc.config(text=f"Description: {current_weather_status['weather'][0]['description']}")
     else:
-        tkinter.messagebox.showwarning("Error!","Weather status could not get")
+        tkinter.messagebox.showwarning("Error!","Weather status could not get! Check your API KEY and city name")
         city_error.config(text="Weather status could not get!",font=("Times New Roman",20,"italic"),fg="red")
+        city_error2.config(text="Check your API KEY and city name!",font=("Times New Roman", 20, "italic"), fg="red")
+
 
 
 my_label = Label(text="Enter your city")
@@ -73,5 +77,8 @@ city_desc.pack()
 
 city_error = Label()
 city_error.pack()
+
+city_error2 = Label()
+city_error2.pack()
 
 window.mainloop()
